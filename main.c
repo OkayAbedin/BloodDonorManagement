@@ -424,8 +424,9 @@ int main()
             clrscr();
             break;
         case 3:
-            printf("Do you want to filter donors those donated blood less than 3 months ago?\n1.Yes\t 2.No");
+            printf("Do you want to filter donors those donated blood less than 3 months ago?\n1.Yes\t 2.No\n");
             int ch;
+            printf("Enter Choice: ");
             scanf("%d", &ch);
             switch (ch)
             {
