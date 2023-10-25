@@ -741,16 +741,16 @@ void viewBloodStock(struct BloodBank *head)
 void displayCustomerList(struct Customer *customerHead)
 {
     printf("\nCustomer List\n");
-    printf("+----------------------+-----------------+-------------------------+-----------------+----------+--------------+\n");
-    printf("|        Name          |  Contact Number |         Address         |   Blood Group   |   Bags   |     Date     |\n");
-    printf("+----------------------+-----------------+-------------------------+-----------------+----------+--------------+\n");
+    printf("+----------------------+----------------+-----------------------+-----------------+--------+--------------+\n");
+    printf("|        Name          | Contact Number |        Address        |   Blood Group   |  Bags  |     Date     |\n");
+    printf("+----------------------+----------------+-----------------------+-----------------+--------+--------------+\n");
     struct Customer *current = customerHead;
     while (current != NULL)
     {
-        printf("| %-20s | %-15s | %-23s | %-15s | %-8d | %-12s |\n", current->name, current->contactNumber, current->address, current->bloodGroup, current->bags, current->date);
+        printf("| %-20s | %-14s | %-21s | %-15s | %-6d | %-12s |\n", current->name, current->contactNumber, current->address, current->bloodGroup, current->bags, current->date);
         current = current->next;
     }
-    printf("+----------------------+-----------------+-------------------------+-----------------+----------+--------------+\n");
+    printf("+----------------------+----------------+-----------------------+-----------------+--------+--------------+\n");
 }
 
 // Function to save data to file
