@@ -3,8 +3,8 @@
 #include <string.h>
 #include <unistd.h>
 #include <time.h>
-
 #define WINDOWS 1
+
 void clrscr()
 {
 #ifdef WINDOWS
@@ -14,12 +14,6 @@ void clrscr()
     system("clear");
 #endif
 }
-
-#define MAX_NAME_LENGTH 50
-#define MAX_ADDRESS_LENGTH 100
-#define MAX_CONTACT_LENGTH 15
-#define MAX_BLOOD_GROUP_LENGTH 5
-
 void splashScreen()
 {
 printf("\n\n\n");
@@ -52,6 +46,7 @@ printf("\t\t\t\t              ###          ###          \n");
 sleep(2);
 clrscr();
 }
+
 void bloodDonorManagementSystem();
 void bloodBankManagementSystem();
 void showHelp()
@@ -98,6 +93,7 @@ void showAbout()
     printf("Thank you for using Blood Donor Management System!\n");
     printf("============================================================================================================\n");
 }
+
 int main()
 {
     splashScreen();
@@ -149,16 +145,14 @@ int main()
 
 typedef struct Donor
 {
-    char name[MAX_NAME_LENGTH];
-    char contactNumber[MAX_CONTACT_LENGTH];
-    char address[MAX_ADDRESS_LENGTH];
-    char bloodGroup[MAX_BLOOD_GROUP_LENGTH];
+    char name[50];
+    char contactNumber[100];
+    char address[150];
+    char bloodGroup[5];
     char lastDonationDate[11];
     struct Donor *next;
 } Donor;
-
 Donor *head = NULL;
-
 void addDonor()
 {
     Donor *newDonor = (Donor *)malloc(sizeof(Donor));
@@ -190,7 +184,6 @@ void addDonor()
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
     printf("Press enter and 6 to save the addition in the file.\n");
 }
-
 void deleteDonorByPhoneNumber()
 {
     if (head == NULL)
@@ -199,7 +192,7 @@ void deleteDonorByPhoneNumber()
         return;
     }
 
-    char contactNumber[MAX_CONTACT_LENGTH];
+    char contactNumber[100];
     printf("Enter the contact number of the donor to delete: ");
     scanf("%s", contactNumber);
 
@@ -239,7 +232,6 @@ void deleteDonorByPhoneNumber()
 
     printf("Donor with contact number %s not found.\n", contactNumber);
 }
-
 void editDonorByPhoneNumber()
 {
     if (head == NULL)
@@ -248,7 +240,7 @@ void editDonorByPhoneNumber()
         return;
     }
 
-    char contactNumber[MAX_CONTACT_LENGTH];
+    char contactNumber[11];
     printf("Enter the contact number of the donor to edit: ");
     scanf("%s", contactNumber);
 
@@ -285,7 +277,6 @@ void editDonorByPhoneNumber()
         printf("Donor with contact number %s not found.\n", contactNumber);
     }
 }
-
 void viewFilteredDonors()
 {
     if (head == NULL)
@@ -294,8 +285,8 @@ void viewFilteredDonors()
         return;
     }
 
-    char bloodGroup[MAX_BLOOD_GROUP_LENGTH];
-    char address[MAX_ADDRESS_LENGTH];
+    char bloodGroup[5];
+    char address[150];
 
     printf("Enter blood group: ");
     scanf("%s", bloodGroup);
@@ -342,7 +333,6 @@ void viewFilteredDonors()
 
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
 }
-
 void searchDonor()
 {
     if (head == NULL)
@@ -351,8 +341,8 @@ void searchDonor()
         return;
     }
 
-    char bloodGroup[MAX_BLOOD_GROUP_LENGTH];
-    char address[MAX_ADDRESS_LENGTH];
+    char bloodGroup[5];
+    char address[150];
 
     printf("Enter blood group: ");
     scanf("%s", bloodGroup);
@@ -387,7 +377,6 @@ void searchDonor()
 
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
 }
-
 void viewAllDonors()
 {
     if (head == NULL)
@@ -411,7 +400,6 @@ void viewAllDonors()
 
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
 }
-
 void saveDonorsToFile()
 {
     FILE *file = fopen("donors.txt", "w");
@@ -433,7 +421,6 @@ void saveDonorsToFile()
     fclose(file);
     printf("Donors data saved to file.\n");
 }
-
 void loadDonorsFromFile()
 {
     FILE *file = fopen("donors.txt", "r");
@@ -459,7 +446,6 @@ void loadDonorsFromFile()
     fclose(file);
     //printf("Donors data loaded from file.\n");
 }
-
 void freeMemory1()
 {
     Donor *current = head;
@@ -472,7 +458,6 @@ void freeMemory1()
         current = next;
     }
 }
-
 void bloodDonorManagementSystem()
 {
     int choice;
@@ -569,15 +554,13 @@ void bloodDonorManagementSystem()
 
     freeMemory1();
 }
-// Structure for blood bank
+
 struct BloodBank
 {
     char bloodGroup[4];
     int stock;
     struct BloodBank *next;
 };
-
-// Structure for customer
 struct Customer
 {
     char name[50];
@@ -588,8 +571,6 @@ struct Customer
     char date[20];
     struct Customer *next;
 };
-
-// Function to read blood stock from file
 struct BloodBank *readBloodStock()
 {
     struct BloodBank *head = NULL;
@@ -618,8 +599,6 @@ struct BloodBank *readBloodStock()
     }
     return head;
 }
-
-// Function to write blood stock to file
 void writeBloodStock(struct BloodBank *head)
 {
     FILE *file = fopen("blood_stock.txt", "w");
@@ -634,8 +613,6 @@ void writeBloodStock(struct BloodBank *head)
         fclose(file);
     }
 }
-
-// Function to add blood group stock
 void addBloodStock(struct BloodBank **head)
 {
     char bloodGroup[4];
@@ -664,8 +641,6 @@ void addBloodStock(struct BloodBank **head)
     *head = node;
     printf("Blood group stock added successfully.\n");
 }
-
-// Function to serve blood to customer
 void serveBlood(struct BloodBank **head, struct Customer **customerHead)
 {
     char name[50];
@@ -720,8 +695,6 @@ void serveBlood(struct BloodBank **head, struct Customer **customerHead)
 
     printf("Blood group not found in stock.\n");
 }
-
-// Function to view blood stock
 void viewBloodStock(struct BloodBank *head)
 {
     printf("\nBlood Stock\n");
@@ -736,8 +709,6 @@ void viewBloodStock(struct BloodBank *head)
     }
     printf("+-------------+-------+\n");
 }
-
-// Function to display customer list
 void displayCustomerList(struct Customer *customerHead)
 {
     printf("\nCustomer List\n");
@@ -752,8 +723,6 @@ void displayCustomerList(struct Customer *customerHead)
     }
     printf("+----------------------+----------------+-----------------------+-----------------+--------+--------------+\n");
 }
-
-// Function to save data to file
 void saveData(struct BloodBank *bloodHead, struct Customer *customerHead)
 {
     writeBloodStock(bloodHead);
@@ -770,8 +739,6 @@ void saveData(struct BloodBank *bloodHead, struct Customer *customerHead)
         printf("Data saved successfully.\n");
     }
 }
-
-// Function to free memory
 void freeMemory2(struct BloodBank *bloodHead, struct Customer *customerHead)
 {
     // Free memory for blood stock
@@ -792,8 +759,6 @@ void freeMemory2(struct BloodBank *bloodHead, struct Customer *customerHead)
         free(tempCustomer);
     }
 }
-
-// Function to read customer list from file
 struct Customer *readCustomerList()
 {
     struct Customer *head = NULL;
