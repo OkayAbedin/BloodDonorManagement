@@ -457,7 +457,7 @@ void loadDonorsFromFile()
     }
 
     fclose(file);
-    //printf("Donors data loaded from file.\n");
+    printf("Donors data loaded from file.\n");
 }
 
 void freeMemory1()
