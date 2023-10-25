@@ -839,7 +839,6 @@ void bloodBankManagementSystem()
         return;
     }
     clrscr();
-    printf("Data loaded from file\n");
     do
     {
         printf("============================================================================================================\n");
