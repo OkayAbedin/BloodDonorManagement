@@ -1,3 +1,4 @@
+//Header files
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -5,6 +6,7 @@
 #include <time.h>
 #define WINDOWS 1
 
+//Function to clear the command prompt screen
 void clrscr()
 {
 #ifdef WINDOWS
@@ -14,6 +16,8 @@ void clrscr()
     system("clear");
 #endif
 }
+
+//Function to display the splashscreen / welcome screen
 void splashScreen()
 {
 printf("\n\n\n");
@@ -25,7 +29,7 @@ printf("\t\t\t\t##   ##   ##     ## ##  ##      ##    ##     ##\n");
 printf("\t\t\t\t##    ##  ##     ## ##   ##     ##    ##     ##\n"); 
 printf("\t\t\t\t##     ##  #######  ##    ##    ##     #######\n");  
 printf("\n");
-sleep(1);
+sleep(1); //To freez the screen for 1 second
 printf("\t\t\t\t    ########     ###    ########    ###   \n"); 
 printf("\t\t\t\t    ##     ##   ## ##      ##      ## ##  \n"); 
 printf("\t\t\t\t    ##     ##  ##   ##     ##     ##   ## \n"); 
@@ -44,56 +48,16 @@ printf("\t\t\t\t          ###########  ###########      \n");
 printf("\t\t\t\t           #########    #########       \n");
 printf("\t\t\t\t              ###          ###          \n");
 sleep(2);
-clrscr();
+clrscr(); //To clear the screen
 }
 
+//Defining the required functions, implemented after the main function 
 void bloodDonorManagementSystem();
 void bloodBankManagementSystem();
-void showHelp()
-{
-    printf("============================================================================================================\n");
-    printf("   Blood Donor Management System Help\n");
-    printf("============================================================================================================\n");
-    printf("1. Add Donor: Allows you to add a new donor to the system.\n");
-    printf("2. Delete Donor: Remove a donor from the system using their contact number.\n");
-    printf("3. Filter Donor: Search for a donor by blood group and address.\n");
-    printf("4. Edit Donor Information by Contact Number: Modify a donor's address and last donation date by their contact number.\n");
-    printf("5. View All Donors: View a list of all donors in the system.\n");
-    printf("6. Save Donors to File: Save the donor data to a file for future use.\n");
-    printf("0. Exit to Main Menu: Return to the main menu.\n");
-    printf("============================================================================================================\n");
-    printf("============================================================================================================\n");
-    printf("   Blood Bank Management System Help\n");
-    printf("============================================================================================================\n");
-    printf("1. Add Blood Stock: Allows you to add a new blood stock to the system.\n");
-    printf("2. Serve Blood to Customer: Allows you to serve blood to customer.\n");
-    printf("3. View Blood Stock: View the quantity of bloods availabe.\n");
-    printf("4. View Customer List: View all the customers details those have been served\n");
-    printf("5. View All Donors: View a list of all donors in the system.\n");
-    printf("6. Save Data to File: Save the stock and customer data to a file for future use.\n");
-    printf("0. Exit to Main Menu: Return to the main menu.\n");
-    printf("============================================================================================================\n");
-}
-void showAbout()
-{
-    printf("============================================================================================================\n");
-    printf("   Blood Donor and Blood Bank Management System - About\n");
-    printf("============================================================================================================\n");
-    printf("Blood Donor and Blood Bank Management System is a sophisticated software solution designed to facilitate\n");
-    printf("the efficient management of blood donor information and blood bank resources. It empowers organizations\n");
-    printf("to streamline their blood donation operations, ensuring the availability of critical resources and data\n");
-    printf("for life-saving activities\n");
-    printf("Version: 1.0\n");
-    printf("Developed by: Minhazul Abedin 221-15-4919, Abid Hasan 221-15-5022\n");
-    printf("Mohima Sharmin 221-15-5855, Sumaiya Akter Ritu 221-15-5173\n");
-    printf("Contact: abedin15-4919@gmail.com\n");
-    printf("Acknowledgments: This software is developed as a course project of CSE135 Data Structure Lab\n");
-    printf("under Daffodil International University. (C) All Rights Reserved.\n");
-    printf("\n");
-    printf("Thank you for using Blood Donor Management System!\n");
-    printf("============================================================================================================\n");
-}
+void showHelp();
+void showAbout();
 
+//Main function, program starts to execute from here
 int main()
 {
     splashScreen();
@@ -143,6 +107,9 @@ int main()
     } while (choice1 != 0);
 }
 
+//The codes for bloodDonorManagemetSystem starts here
+
+//Defining the structue of Donor
 typedef struct Donor
 {
     char name[50];
@@ -152,7 +119,10 @@ typedef struct Donor
     char lastDonationDate[11];
     struct Donor *next;
 } Donor;
+
 Donor *head = NULL;
+
+//Function to add donor in the system
 void addDonor()
 {
     Donor *newDonor = (Donor *)malloc(sizeof(Donor));
@@ -184,6 +154,8 @@ void addDonor()
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
     printf("Press enter and 6 to save the addition in the file.\n");
 }
+
+//Function to Delete Donor searching by phone number as an unique key from the system
 void deleteDonorByPhoneNumber()
 {
     if (head == NULL)
@@ -232,6 +204,8 @@ void deleteDonorByPhoneNumber()
 
     printf("Donor with contact number %s not found.\n", contactNumber);
 }
+
+//Function to Edit Donor searching by phone number as an unique key from the system
 void editDonorByPhoneNumber()
 {
     if (head == NULL)
@@ -277,6 +251,8 @@ void editDonorByPhoneNumber()
         printf("Donor with contact number %s not found.\n", contactNumber);
     }
 }
+
+//Function to find the donors how has been donoted blood more than 3 months ago using blood group and address
 void viewFilteredDonors()
 {
     if (head == NULL)
@@ -333,6 +309,8 @@ void viewFilteredDonors()
 
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
 }
+
+//Function to find the donors using Blood Group and Address
 void searchDonor()
 {
     if (head == NULL)
@@ -377,6 +355,8 @@ void searchDonor()
 
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
 }
+
+//Function to show all donors in the system
 void viewAllDonors()
 {
     if (head == NULL)
@@ -400,6 +380,8 @@ void viewAllDonors()
 
     printf("+------------------+-----------------+-------------------------+-----------------+-------------------------+\n");
 }
+
+//Function to save the current tempory donor data stored in the linkedlist to the donors.txt file
 void saveDonorsToFile()
 {
     FILE *file = fopen("donors.txt", "w");
@@ -421,6 +403,8 @@ void saveDonorsToFile()
     fclose(file);
     printf("Donors data saved to file.\n");
 }
+
+//Function to load donor data from the donors.txt everytime program is executed 
 void loadDonorsFromFile()
 {
     FILE *file = fopen("donors.txt", "r");
@@ -446,6 +430,8 @@ void loadDonorsFromFile()
     fclose(file);
     //printf("Donors data loaded from file.\n");
 }
+
+//Function the free the memory after program is closed 
 void freeMemory1()
 {
     Donor *current = head;
@@ -458,6 +444,8 @@ void freeMemory1()
         current = next;
     }
 }
+
+//The blood donor management system function
 void bloodDonorManagementSystem()
 {
     int choice;
@@ -555,12 +543,19 @@ void bloodDonorManagementSystem()
     freeMemory1();
 }
 
+//The codes for bloodDonorManagemetSystem ends here
+
+//The codes for bloodBankManagementSystem starts here
+
+//Defining the structue of BloodBank
 struct BloodBank
 {
     char bloodGroup[4];
     int stock;
     struct BloodBank *next;
 };
+
+//Defining the structue of Customer
 struct Customer
 {
     char name[50];
@@ -571,6 +566,8 @@ struct Customer
     char date[20];
     struct Customer *next;
 };
+
+//Function to load the blood stock from the blood_stock.txt file
 struct BloodBank *readBloodStock()
 {
     struct BloodBank *head = NULL;
@@ -599,6 +596,8 @@ struct BloodBank *readBloodStock()
     }
     return head;
 }
+
+//Function to save the blood stock stored temporary in the linkedlist to the blood_stock.txt file
 void writeBloodStock(struct BloodBank *head)
 {
     FILE *file = fopen("blood_stock.txt", "w");
@@ -613,6 +612,8 @@ void writeBloodStock(struct BloodBank *head)
         fclose(file);
     }
 }
+
+//Function to add blood stock in the linkedlist
 void addBloodStock(struct BloodBank **head)
 {
     char bloodGroup[4];
@@ -641,6 +642,8 @@ void addBloodStock(struct BloodBank **head)
     *head = node;
     printf("Blood group stock added successfully.\n");
 }
+
+//Function to serve/sell blood to the customer 
 void serveBlood(struct BloodBank **head, struct Customer **customerHead)
 {
     char name[50];
@@ -695,6 +698,8 @@ void serveBlood(struct BloodBank **head, struct Customer **customerHead)
 
     printf("Blood group not found in stock.\n");
 }
+
+//Function to show available blood stock
 void viewBloodStock(struct BloodBank *head)
 {
     printf("\nBlood Stock\n");
@@ -709,6 +714,8 @@ void viewBloodStock(struct BloodBank *head)
     }
     printf("+-------------+-------+\n");
 }
+
+//Function to display the customer and sell info
 void displayCustomerList(struct Customer *customerHead)
 {
     printf("\nCustomer List\n");
@@ -723,6 +730,8 @@ void displayCustomerList(struct Customer *customerHead)
     }
     printf("+----------------------+----------------+-----------------------+-----------------+--------+--------------+\n");
 }
+
+//Function to save temporary customer / sell data in the linkedlist to the customers_list.txt
 void saveData(struct BloodBank *bloodHead, struct Customer *customerHead)
 {
     writeBloodStock(bloodHead);
@@ -739,26 +748,8 @@ void saveData(struct BloodBank *bloodHead, struct Customer *customerHead)
         printf("Data saved successfully.\n");
     }
 }
-void freeMemory2(struct BloodBank *bloodHead, struct Customer *customerHead)
-{
-    // Free memory for blood stock
-    struct BloodBank *currentBlood = bloodHead;
-    while (currentBlood != NULL)
-    {
-        struct BloodBank *tempBlood = currentBlood;
-        currentBlood = currentBlood->next;
-        free(tempBlood);
-    }
 
-    // Free memory for customer list
-    struct Customer *currentCustomer = customerHead;
-    while (currentCustomer != NULL)
-    {
-        struct Customer *tempCustomer = currentCustomer;
-        currentCustomer = currentCustomer->next;
-        free(tempCustomer);
-    }
-}
+//Function to load customer list from the customer_list.txt file
 struct Customer *readCustomerList()
 {
     struct Customer *head = NULL;
@@ -787,6 +778,30 @@ struct Customer *readCustomerList()
     }
     return head;
 }
+
+//Function to free the memory after program is closed
+void freeMemory2(struct BloodBank *bloodHead, struct Customer *customerHead)
+{
+    // Free memory for blood stock
+    struct BloodBank *currentBlood = bloodHead;
+    while (currentBlood != NULL)
+    {
+        struct BloodBank *tempBlood = currentBlood;
+        currentBlood = currentBlood->next;
+        free(tempBlood);
+    }
+
+    // Free memory for customer list
+    struct Customer *currentCustomer = customerHead;
+    while (currentCustomer != NULL)
+    {
+        struct Customer *tempCustomer = currentCustomer;
+        currentCustomer = currentCustomer->next;
+        free(tempCustomer);
+    }
+}
+
+//The blood bank management system function
 void bloodBankManagementSystem()
 {
     struct BloodBank *bloodHead = readBloodStock();
@@ -872,4 +887,54 @@ void bloodBankManagementSystem()
     } while (choice != 0);
 
     freeMemory2(bloodHead, customerHead);
+}
+
+//The codes for bloodBankManagementSystem ends here
+
+//Function to show help
+void showHelp()
+{
+    printf("============================================================================================================\n");
+    printf("   Blood Donor Management System Help\n");
+    printf("============================================================================================================\n");
+    printf("1. Add Donor: Allows you to add a new donor to the system.\n");
+    printf("2. Delete Donor: Remove a donor from the system using their contact number.\n");
+    printf("3. Filter Donor: Search for a donor by blood group and address.\n");
+    printf("4. Edit Donor Information by Contact Number: Modify a donor's address and last donation date by their contact number.\n");
+    printf("5. View All Donors: View a list of all donors in the system.\n");
+    printf("6. Save Donors to File: Save the donor data to a file for future use.\n");
+    printf("0. Exit to Main Menu: Return to the main menu.\n");
+    printf("============================================================================================================\n");
+    printf("============================================================================================================\n");
+    printf("   Blood Bank Management System Help\n");
+    printf("============================================================================================================\n");
+    printf("1. Add Blood Stock: Allows you to add a new blood stock to the system.\n");
+    printf("2. Serve Blood to Customer: Allows you to serve blood to customer.\n");
+    printf("3. View Blood Stock: View the quantity of bloods availabe.\n");
+    printf("4. View Customer List: View all the customers details those have been served\n");
+    printf("5. View All Donors: View a list of all donors in the system.\n");
+    printf("6. Save Data to File: Save the stock and customer data to a file for future use.\n");
+    printf("0. Exit to Main Menu: Return to the main menu.\n");
+    printf("============================================================================================================\n");
+}
+
+//Function to show about 
+void showAbout()
+{
+    printf("============================================================================================================\n");
+    printf("   Blood Donor and Blood Bank Management System - About\n");
+    printf("============================================================================================================\n");
+    printf("Blood Donor and Blood Bank Management System is a sophisticated software solution designed to facilitate\n");
+    printf("the efficient management of blood donor information and blood bank resources. It empowers organizations\n");
+    printf("to streamline their blood donation operations, ensuring the availability of critical resources and data\n");
+    printf("for life-saving activities\n");
+    printf("Version: 1.0\n");
+    printf("Developed by: Minhazul Abedin 221-15-4919, Abid Hasan 221-15-5022\n");
+    printf("Mohima Sharmin 221-15-5855, Sumaiya Akter Ritu 221-15-5173\n");
+    printf("Contact: abedin15-4919@gmail.com\n");
+    printf("Acknowledgments: This software is developed as a course project of CSE135 Data Structure Lab\n");
+    printf("under Daffodil International University. (C) All Rights Reserved.\n");
+    printf("\n");
+    printf("Thank you for using Blood Donor Management System!\n");
+    printf("============================================================================================================\n");
 }
