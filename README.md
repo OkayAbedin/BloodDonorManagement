@@ -1,6 +1,6 @@
 Introducing RoktoData, the Blood Donor and Blood Bank Management System. RoktoData is a robust software solution meticulously crafted to empower organizations and healthcare facilities to effectively manage and coordinate critical information related to blood donors and blood banks. This versatile program provides an array of features, enabling you to seamlessly add, delete, search, and update donor and blood bank data, fostering efficient management of blood donation records.
 
-Version: 2.0
+Version: 2.1
 
 Developer: Minhazul Abedin
 
